@@ -19,14 +19,15 @@ public class InventoryManager {
                 try {
                     if (tokens.length < 5) throw new IllegalArgumentException("Incomplete record");
 
-
                     //add instrument
                     if (tokens.length == 5 ) {
- 
+                        Instrument i = new Instrument(tokens[0],tokens[1],tokens[2],Integer.parseInt(tokens[3]),Integer.parseInt(tokens[4]));
+                        inventory.add(i);
                     }
                     //add string instrument
                     else {
- 
+                        StringInstrument i = new StringInstrument(tokens[0],tokens[1],tokens[2],Integer.parseInt(tokens[3]),Integer.parseInt(tokens[4]),Integer.parseInt(tokens[5]),Integer.parseInt(tokens[6]),Boolean.parseBoolean(tokens[7]));
+                        inventory.add(i);
                     }
                 } catch (Exception e) {
                     errorWriter.write("Error: " + e.getMessage() + " — " + line + "\n");
@@ -42,9 +43,10 @@ public class InventoryManager {
     //POST: print the inventory to the report file
     public static void listInstruments(ArrayList<Instrument> inventory, PrintWriter writer){
         writer.write("\n\nFULL INVENTORY LIST\n");
-        writer.write(String.format("%-20s%-20s%-20s%10s%10s%15s\n","TYPE","NAME","MANUFACTURER","YEAR","COST $","STRING INFO"));
+        writer.write(String.format("%-20s%-20s%-20s%10s%10s%15s%15s\n","TYPE","NAME","MANUFACTURER","YEAR","COST $","STRING INFO"," "," "));
         for (Instrument i : inventory) {
-            writer.print(i); 
+            writer.print(i);
+            System.out.println(i);
         }
 
     }

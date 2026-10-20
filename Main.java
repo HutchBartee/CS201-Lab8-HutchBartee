@@ -18,15 +18,26 @@ class Main {
 
         //readFile will open & close error file
         InventoryManager.readFile(inputFile, errorFile, inventory);
-        System.out.println("Inventory loaded: " + inventory.size() + " items.\n");
+        System.out.print("Inventory loaded: " + inventory.size() + " items.\n");
 
         //try to open the output file for the report 
         try (PrintWriter writer = new PrintWriter(new FileWriter(reportFile))) {
-            int choice;
+            int choice = 0;
             //print the menu & stay in loop until '4' is chosen
             //add logic (switch?) to choose which function to do based on input
-  
-
+            while(choice != 4){
+                System.out.print("\nWelcome to the Instrument Database\n" +
+                                    "Your choices are:\n" +
+                                    "1. List All Instruments\n" +
+                                    "2. Find Specific Instruments\n" +
+                                    "3. List All Instruments for a Manufacturer\n" +
+                                    "4. Exit\n" +
+                                    "Enter choice: ");
+                choice = scanner.nextInt();
+                if(choice == 1){
+                    InventoryManager.listInstruments(inventory,writer);
+                }
+            }
             scanner.close();
         
         } catch (IOException e) {
